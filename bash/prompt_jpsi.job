@@ -1,0 +1,26 @@
+#!/bin/bash
+rm -f  JpsiToEE_10TeV_no_cuts.root
+rm -f  JpsiToEE_10TeV_analysis_no_cuts.root
+rm -f  JpsiToEE_10TeV_analysis_no_cuts_aug24.log
+
+curdir=`pwd`
+
+echo $curdir
+cd /afs/cern.ch/user/a/attikis/scratch0/CMSSW_2_0_10/src/analysis/JpsiAnalyzer/
+eval `scramv1 ru -sh`
+cd $curdir
+
+# Execute the job command and redirect the output to a log file: 
+cmsRun j_psi_analyzer.cfg >& JpsiToEE_10TeV_analysis_no_cuts_aug24.log
+
+# Copy log file to CASTOR
+rfcp JpsiToEE_10TeV_analysis_no_cuts_aug24.log /castor/cern.ch/user/a/attikis/prompt/no_cuts_aug_24_08/
+
+# Copy ROOT file to CASTOR
+rfcp JpsiToEE_10TeV_no_cuts.root /castor/cern.ch/user/a/attikis/prompt/no_cuts_aug_24_08/
+
+# Copy ANALYSIS ROOT file to CASTOR
+rfcp JpsiToEE_10TeV_analysis_no_cuts.root /castor/cern.ch/user/a/attikis/prompt/no_cuts_aug_24_08/
+
+# Copy ANALYSIS ROOT file to LXPLUS
+cp JpsiToEE_10TeV_analysis_no_cuts.root /afs/cern.ch/user/a/attikis/scratch0/CMSSW_2_0_10/src/analysis/JpsiAnalyzer/no_cuts_aug_24_08/
