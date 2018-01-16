@@ -1,0 +1,38 @@
+#!/bin/csh
+echo "=== Using SHELL:"
+echo $SHELL
+echo ""
+
+set baseDir=/Users/attikis/my_work/cms/lxplus/hltaus/HLTausAnalysis/
+echo "=== Changing directory to:"
+echo $baseDir
+cd $baseDir
+echo ""
+
+set script=setup.csh
+echo "=== Sourcing setup script:"
+echo "source $script"
+echo ""
+source $script
+echo ""
+
+set workDir=NtupleAnalysis/src/CaloPlusTracks/work/
+echo "=== Changing directory to:"
+echo $workDir
+cd $workDir
+echo ""
+
+
+set curdir=`pwd`
+set rootDir=/Users/attikis/ROOT/v5-34-00-patches/
+echo '=== Setting up ROOT:'
+echo 'cd $rootDir; source bin/thisroot.csh'
+cd $rootDir
+source bin/thisroot.csh
+echo ""
+
+echo "=== Current Working Directory is:"
+cd $curdir
+echo $curdir
+echo ""
+# root -l
